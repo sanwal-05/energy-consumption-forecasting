@@ -192,14 +192,64 @@ jupyter lab
 
 To execute the entire notebook programmatically from the terminal and update all cell outputs:
 ```bash
-.venv/bin/jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=600 notebooks/energy-forcast.ipynb
+.venv/bin/jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=600 notebooks/energy_forecasting.ipynb
 ```
+
+### Running the Full-Stack Dashboard (`dashboard/backend` + `dashboard/frontend`)
+
+The dashboard runs on macOS with two commands—one for the FastAPI backend (`port 8000`) and one for the React + Vite frontend (`port 5173`):
+
+```bash
+# Terminal 1: Start the FastAPI backend on http://127.0.0.1:8000
+source .venv/bin/activate
+uvicorn dashboard.backend.main:app --reload --port 8000
+
+# Terminal 2: Start the React + Vite frontend on http://localhost:5173
+cd dashboard/frontend
+npm install   # first time only
+npm run dev
+```
+
+Open **`http://localhost:5173`** in your browser to explore the 4 tabs (**1. Dashboard**, **2. Interactive Analytics**, **3. Predictions**, and **4. Insights & Recommendations**).
+
+#### Available REST Endpoints
+| Method & Endpoint | Description |
+|---|---|
+| `GET /api/summary` | Top-level KPIs: total & average consumption, peak hour, best model (`R²`, `RMSE`, `MAE`), and share of readings above typical. |
+| `GET /api/trends?granularity=hour\|day\|week\|month&start=&end=&household=` | Consumption trend series grouped by `hour`, `day`, `week`, or `month` with optional date range and `household_id` filter. |
+| `GET /api/predictions?start=&end=` | Test-period actual vs. predicted consumption with signed error, absolute error, and percentage error per point. |
+| `GET /api/models` | Full 7-model comparison table (`MAE`, `RMSE`, `R²`, `MAPE`, `CV_MAE`, `Train_MAE`, `overfit_gap`) and baseline metrics from `models/metrics.json`. |
+| `GET /api/insights` | Computed findings from `models/insights.json` (peak hours, weekday vs. weekend, seasonal pattern, weather/tariff effects, top-consuming devices, regional breakdown). |
+| `GET /api/recommendations` | 5 rule-based energy-saving recommendations citing exact dataset findings and computed saving `%` from the data. |
+| `POST /api/simulate` | Deterministic demand-response simulation accepting `adoption_rate` (`0–100%`) and `peak_hour_shift` (`0–100%`) and returning estimated peak reduction and tariff savings. |
 
 ### Directory Structure
 
 ```text
 energy-consumption-forecasting-main/
+├── dashboard/
+│   ├── backend/
+│   │   ├── main.py                   # FastAPI backend serving exported Phase 1 artifacts
+│   │   └── requirements.txt          # Backend dependencies
+│   └── frontend/
+│       ├── index.html
+│       ├── package.json              # React, Recharts, Tailwind CSS, Vite
+│       ├── vite.config.js
+│       └── src/
+│           ├── App.jsx               # Top navbar & 4-tab layout
+│           ├── api.js                # API client for /api/*
+│           ├── tokens.js             # Semantic green/red design tokens
+│           └── components/
+│               ├── DashboardTab.jsx  # Tab 1: KPI cards, SVG semicircle gauge, device/region bar chart
+│               ├── AnalyticsTab.jsx  # Tab 2: Granularity toggle, date/household filters, zoom brush
+│               ├── PredictionsTab.jsx# Tab 3: Actual vs Predicted overlay, residual bars, model table
+│               ├── InsightsTab.jsx   # Tab 4: Pattern charts, recommendation cards, DR simulator
+│               ├── SemicircleGauge.jsx
+│               └── StatusViews.jsx
 ├── data/
+│   ├── processed/                    # Exported daily series & test-set predictions
+│   │   ├── predictions.csv
+│   │   └── timeseries.csv
 │   └── raw/                          # 5 primary CSV streams (50,000 rows each)
 │       ├── raw_energy_usage.csv
 │       ├── device_metrics.csv
@@ -208,9 +258,15 @@ energy-consumption-forecasting-main/
 │       └── tariff_metrics.csv
 ├── docs/
 │   └── PROJECT_DOCUMENTATION.md      # Detailed technical methodology and validation documentation
+├── models/                           # Exported model pipeline, metrics, and insights JSON
+│   ├── best_model.joblib
+│   ├── insights.json
+│   └── metrics.json
 ├── notebooks/
-│   └── energy-forcast.ipynb          # Executed primary analysis, modelling, and recommendation notebook
+│   ├── energy_forecasting.ipynb      # Executed primary analysis, modelling, and export notebook
+│   └── energy-forcast.ipynb
 ├── AGENTS.md                         # Project specifications and analytical guidelines
+├── Agents2.md                        # Phase 2 dashboard specifications
 ├── README.md                         # Academic project documentation
 └── requirements.txt                  # Python dependencies
 ```

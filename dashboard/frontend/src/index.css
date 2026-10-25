@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+:root {
+  /* Good / low consumption (green) */
+  --green-900: #204110;
+  --green-700: #375f25;
+  --green-500: #749764;
+  --green-300: #a0bd85;
+  --green-100: #c8d9c2;
+
+  /* Bad / high consumption (red) */
+  --red-900: #6b0015;
+  --red-800: #850014;
+  --red-700: #a50727;
+  --red-600: #ae001a;
+  --red-500: #e10531;
+}
+
+body {
+  background-color: #ffffff;
+  color: #1f2937;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+input[type="range"] {
+  accent-color: #204110;
+}

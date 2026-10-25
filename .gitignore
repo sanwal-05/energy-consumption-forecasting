@@ -7,3 +7,6 @@ venv/
 .DS_Store
 *.zip
 .streamlit/secrets.toml
+node_modules/
+dashboard/frontend/node_modules/
+dashboard/frontend/dist/

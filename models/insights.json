@@ -1,0 +1,147 @@
+{
+  "peak_hours": {
+    "highest_hour": 3,
+    "highest_hour_mean_kwh": 26.02,
+    "lowest_hour": 9,
+    "lowest_hour_mean_kwh": 25.11,
+    "mean_peak_demand_kw": 8.01,
+    "mean_offpeak_demand_kw": 5.25,
+    "peak_to_offpeak_demand_ratio": 1.527,
+    "poor_load_factor_share_pct": 24.6,
+    "hourly_mean_kwh": {
+      "0": 25.84,
+      "1": 25.62,
+      "2": 25.51,
+      "3": 26.02,
+      "4": 25.6,
+      "5": 25.76,
+      "6": 25.38,
+      "7": 25.71,
+      "8": 25.33,
+      "9": 25.11,
+      "10": 25.65,
+      "11": 25.49,
+      "12": 25.93,
+      "13": 25.11,
+      "14": 25.6,
+      "15": 25.57,
+      "16": 25.62,
+      "17": 25.66,
+      "18": 25.33,
+      "19": 25.75,
+      "20": 25.69,
+      "21": 25.24,
+      "22": 25.28,
+      "23": 25.21
+    }
+  },
+  "weekday_vs_weekend": {
+    "weekday_mean_kwh": 25.56,
+    "weekend_mean_kwh": 25.5,
+    "by_day_of_week": {
+      "0": 25.41,
+      "1": 25.57,
+      "2": 25.57,
+      "3": 25.51,
+      "4": 25.74,
+      "5": 25.5,
+      "6": 25.49
+    }
+  },
+  "seasonal_pattern": {
+    "highest_month": 1,
+    "highest_month_mean_kwh": 25.88,
+    "lowest_month": 6,
+    "lowest_month_mean_kwh": 25.08,
+    "monthly_mean_kwh": {
+      "1": 25.88,
+      "2": 25.39,
+      "3": 25.54,
+      "4": 25.7,
+      "5": 25.69,
+      "6": 25.08,
+      "7": 25.34,
+      "8": 25.57,
+      "9": 25.74,
+      "10": 25.54,
+      "11": 25.51,
+      "12": 25.51
+    }
+  },
+  "weather_effects": {
+    "temperature_band_mean_kwh": {
+      "Cool (15-22\u00b0C)": 25.58,
+      "Moderate (22-30\u00b0C)": 25.49,
+      "Hot (30-40\u00b0C)": 25.55
+    },
+    "correlations_with_consumption": {
+      "temperature": 0.0497,
+      "humidity": -0.0106,
+      "wind_speed": -0.067,
+      "solar_radiation": -0.0566,
+      "rainfall": -0.0092
+    },
+    "hot_weather_readings_share_pct": 39.1,
+    "high_solar_readings_share_pct": 32.7
+  },
+  "tariff_effects": {
+    "mean_peak_rate": 9.98,
+    "mean_offpeak_rate": 5.01,
+    "mean_unit_rate": 6.49,
+    "peak_rate_premium_pct": 99.4,
+    "by_plan_type": {
+      "Commercial": {
+        "offpeak_rate": 5.0,
+        "unit_rate": 6.51,
+        "peak_rate": 9.97,
+        "monthly_bill": 1102.33,
+        "late_fee": 50.08
+      },
+      "Industrial": {
+        "offpeak_rate": 5.01,
+        "unit_rate": 6.49,
+        "peak_rate": 9.96,
+        "monthly_bill": 1101.84,
+        "late_fee": 50.09
+      },
+      "Residential": {
+        "offpeak_rate": 5.01,
+        "unit_rate": 6.48,
+        "peak_rate": 10.01,
+        "monthly_bill": 1103.11,
+        "late_fee": 50.09
+      }
+    },
+    "mean_late_fee": 50.09
+  },
+  "top_consuming_devices": [
+    {
+      "device": "Washer",
+      "energy_draw_kwh": 20.6,
+      "device_power_kw": 4.14,
+      "runtime_hours": 12.5,
+      "efficiency_ratio": 0.75
+    },
+    {
+      "device": "Dryer",
+      "energy_draw_kwh": 20.34,
+      "device_power_kw": 4.14,
+      "runtime_hours": 12.49,
+      "efficiency_ratio": 0.75
+    },
+    {
+      "device": "HVAC",
+      "energy_draw_kwh": 20.34,
+      "device_power_kw": 4.15,
+      "runtime_hours": 12.53,
+      "efficiency_ratio": 0.75
+    },
+    {
+      "device": "Refrigerator",
+      "energy_draw_kwh": 20.22,
+      "device_power_kw": 4.15,
+      "runtime_hours": 12.52,
+      "efficiency_ratio": 0.75
+    }
+  ]
+}
